@@ -6,24 +6,22 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.Access;
 @Component
-@Transactional(propagation = Propagation.REQUIRES_NEW)
-public class FirstCall {
+public class CacheCall {
 
     @Autowired
     ProductRepo productRepo;
 
-
-    public Product firstCall() {
+    public Product firstCall1() {
+        System.out.println("****** CacheCall1 class *****");
         Product pro = productRepo.findById(130).orElseThrow(() -> new CustomResourceNotFoundException("Not found employee with id : "));
         System.out.println(pro.getProductId());
-
         return pro;
     }
 
     //@Transactional(propagation = Propagation.REQUIRES_NEW)
-    public Product secondCall() {
+    public Product secondCall1() {
+        System.out.println("****** CacheCall1 class *****");
         Product product = productRepo.findById(130).orElseThrow(() -> new CustomResourceNotFoundException("not found id "));
         System.out.println(product.getProductId());
         System.out.println(product.getProductName());

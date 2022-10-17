@@ -1,4 +1,4 @@
-package com.example.SpringBootFirst;
+package com.example.SpringBootFirst.beanUtilImple;
 
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;

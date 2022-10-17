@@ -1,7 +1,6 @@
-package com.example.SpringBootFirst.test;
+package com.example.SpringBootFirst.beanTest;
 
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 
 @Component
 public class Child2 implements Test{

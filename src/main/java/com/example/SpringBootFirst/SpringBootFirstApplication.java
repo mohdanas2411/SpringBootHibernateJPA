@@ -1,41 +1,34 @@
 package com.example.SpringBootFirst;
 
-import com.example.SpringBootFirst.studentHibernate.Student;
-import com.example.SpringBootFirst.studentHibernate.StudentService;
-import org.hibernate.Criteria;
+import com.example.SpringBootFirst.employeeJPA.RestTemplateModificationInterceptor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Projection;
-import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.http.client.ClientHttpRequestInterceptor;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
-import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 @RestController
-
+@EnableCaching
 public class SpringBootFirstApplication {
 
     @Autowired
     EntityManagerFactory entityManagerFactory;
 
-    @Autowired
-    EntityManager entityManager;
-
     public static void main(String[] args) {
         SpringApplication.run(SpringBootFirstApplication.class, args);
-
 
     }
 
@@ -52,6 +45,28 @@ public class SpringBootFirstApplication {
         Session session = sessionFactory.openSession();
         return session;
     }
+    @Bean
+    public EntityManager getEntityManager(){
+        return entityManagerFactory.createEntityManager();
+    }
+
+
+
+
+//    @Bean(name = "transactionManager")
+//    public JpaTransactionManager getTransactionManager() {
+//        JpaTransactionManager tm = new JpaTransactionManager();
+//
+//        tm.setEntityManagerFactory(entityManagerFactory);
+//        return tm;
+//    }
+
+//    @Bean(name = "transactionManager")
+//    public Transaction getTransaction(){
+//        Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
+//        Transaction transaction = session.beginTransaction();
+//        return transaction;
+//    }
 
 
 }

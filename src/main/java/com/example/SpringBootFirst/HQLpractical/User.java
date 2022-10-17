@@ -1,11 +1,12 @@
-package com.example.SpringBootFirst.hqlpractical;
+package com.example.SpringBootFirst.HQLpractical;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.List;
 
 @Entity
-public class User {
+public class User{
     @Id
     @GeneratedValue
     private int userId;

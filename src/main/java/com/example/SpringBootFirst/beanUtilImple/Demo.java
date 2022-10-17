@@ -1,4 +1,4 @@
-package com.example.SpringBootFirst;
+package com.example.SpringBootFirst.beanUtilImple;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,8 @@ public class Demo {
     @Autowired
     TE te;
 
-    @Autowired Hello h;
+    @Autowired
+    Hello h;
 
 
     @GetMapping("demo")

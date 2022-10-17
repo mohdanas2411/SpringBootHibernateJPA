@@ -11,41 +11,43 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
-@EnableTransactionManagement
 @Transactional
 public class StudentService {
     @Autowired
     private Session session;
 
-    @Transactional
     public Student getStuent(int id) {
         Student student = session.get(Student.class, id);
         return student;
     }
 
+
     @Transactional
     public Student saveStu() {
 
-        Transaction tx = null;
+        //Transaction tx = null;
+
+        Student student = new Student();
+        student.setSname("mohd anas ansari");
+        student.setSadd("shaheen bagh");
+        student.setSalary(170);
+//
+//            session.enableFilter("sal")
+//                    .setParameter("incomeLimit", 1000);
         try {
-
-            Student student = new Student();
-            student.setSname("mohd anas ansari");
-            student.setSadd("shaheen bagh");
-            student.setSalary(170);
-
-            session.enableFilter("sal")
-                    .setParameter("incomeLimit", 1000);
-
-            tx = session.beginTransaction();
+            //     tx = session.beginTransaction();
             session.save(student);
-            tx.commit();
+            //   tx.commit();
             return student;
         } catch (Exception e) {
-            if (tx != null) tx.rollback();
+            // if (tx != null) tx.rollback();
             throw e;
+        }
+        finally {
+            session.close();
         }
 
 //
@@ -60,7 +62,7 @@ public class StudentService {
     }
 
 
-    public void show() {
+    public List<Student> show() {
         Criteria criteria = session.createCriteria(Student.class);
         Projection pro1 = Projections.property("sname");
         criteria.setProjection(pro1);
@@ -71,28 +73,19 @@ public class StudentService {
         System.out.println("or");
 
         Criteria criteria1 = session.createCriteria(Student.class);
+
+        criteria1.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
         List list = criteria1.setProjection(
                 Projections.projectionList()
                         .add(Projections.property("sname"))
                         .add(Projections.property("sid"))
                         .add(Projections.groupProperty("sid")).add(Projections.count("sid"))
         ).list();
-//        Iterator iterator = list.iterator();
-//        while (iterator.hasNext()){
-//            Object obj = iterator.next();
-//                if (obj instanceof String[]) {
-//                    String[] strArray = (String[]) obj;
-//                    System.out.println(Arrays.toString(strArray));
-//                     System.out.println(obj);
-//                    System.out.println(((String[]) obj).length);
-//                }
-//        }
-
-
+        return list;
     }
 
 
-    public List<Student> showStu(){
+    public List<Student> showStu() {
         List<Student> students = session.createQuery("from Student")
                 .getResultList();
 

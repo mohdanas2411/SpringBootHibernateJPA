@@ -1,15 +1,11 @@
-package com.example.SpringBootFirst.hqlpractical;
+package com.example.SpringBootFirst.HQLpractical;
 
-import org.apache.catalina.LifecycleState;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Random;
 
 @Service
 public class UserService {

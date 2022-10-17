@@ -1,6 +1,7 @@
-package com.example.SpringBootFirst;
+package com.example.SpringBootFirst.beanUtilImple;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.SpringBootFirst.beanUtilImple.B;
+import com.example.SpringBootFirst.beanUtilImple.Hello;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 

@@ -3,7 +3,6 @@ package com.example.SpringBootFirst.relationMapping.oneToOne;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "teacher")
 public class TeacherOnetoOne {
 
 
